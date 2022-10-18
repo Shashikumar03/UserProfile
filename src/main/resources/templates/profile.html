@@ -5,7 +5,7 @@
     <title>Profile</title>
 </head>
 <body>
-<h1><p th:text="'WelCome:'+${user.getName()}" /> </h1>
+<h1><p th:text="'Welcome :'+${user.getName()}" /> </h1>
 <table class="table table-bordered">
     <thead></thead>
     <tbody>
@@ -21,7 +21,7 @@
                   method="get">
                 <button>Edit it</button>
             </form>
-<br>
+
             <form th:action="@{/}"
                                method="get">
             <button>logout</button>

@@ -11,19 +11,20 @@ public class userServiceImplementation implements UserService {
 
     @Autowired
     UserRepository userRepository;
+
     @Override
     public User getUserByEmail(String email) {
-        return  userRepository.findByEmail( email);
+        return userRepository.findByEmail(email);
     }
 
     @Override
     public User getUserById(int id) {
-       return  userRepository.findById(id).get();
+        return userRepository.findById(id).get();
     }
 
     @Override
     public boolean nameMatched(String name) {
-        if(userRepository.existsByName(name)){
+        if (userRepository.existsByName(name)) {
             return true;
         }
         return false;
@@ -31,7 +32,7 @@ public class userServiceImplementation implements UserService {
 
     @Override
     public boolean emailMatched(String email) {
-        if(userRepository.existsByEmail(email)){
+        if (userRepository.existsByEmail(email)) {
             return true;
         }
         return false;
@@ -39,7 +40,7 @@ public class userServiceImplementation implements UserService {
 
     @Override
     public boolean passwordMatch(String password) {
-        if(userRepository.existsByPassword(password)){
+        if (userRepository.existsByPassword(password)) {
             return true;
         }
         return false;

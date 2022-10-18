@@ -4,6 +4,7 @@ import com.example.profile.entities.User;
 import com.example.profile.helper.Message;
 import com.example.profile.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+@Controller
 public class UserController {
     @Autowired
     UserService userService;
@@ -49,6 +51,7 @@ public class UserController {
             return "user";
         }
     }
+
     @GetMapping("/loginpage")
     public String loginPage() {
         return "login";
@@ -73,7 +76,7 @@ public class UserController {
             model.addAttribute("user", user);
             session.setAttribute("message", new Message(" Server error !! " + e.getMessage(), "alter-danger"));
         }
-        User user1=   userService.getUserById(id);
+        User user1 = userService.getUserById(id);
         model.addAttribute("user", user1);
         return "profile";
     }

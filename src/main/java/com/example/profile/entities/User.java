@@ -14,7 +14,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 
-
 @Entity
 public class User {
     @Id
@@ -28,15 +27,27 @@ public class User {
     private String lastName;
 
     @NotBlank(message = "Enter Valid Mobile Number")
-    @Pattern(regexp="(^$|[0-9]{10})")
+    @Pattern(regexp = "(^$|[0-9]{10})")
     private String phoneNumber;
 
 
-
-    @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}", message = "axxa se kar bdsk")
+    @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}", message = "Invalid  email format")
     private String email;
 
     private String password;
+
+    public User(int id, String name, String lastName, String phoneNumber, String email, String password) {
+        this.id = id;
+        this.name = name;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User() {
+        super();
+    }
 
     public int getId() {
         return id;
@@ -84,19 +95,6 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public User(int id, String name, String lastName, String phoneNumber, String email, String password) {
-        this.id = id;
-        this.name = name;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.password = password;
-    }
-
-    public User() {
-        super();
     }
 
     @Override

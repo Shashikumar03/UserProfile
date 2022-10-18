@@ -13,138 +13,100 @@
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
 
-<!--<div>-->
-<!--    <br>-->
-<!--    <form action="#" th:action="@{/updated/profile/{id}(id=${user.getId()})}" method="post">-->
-<!--        Name-->
-<!--        <input type="text" th:value="${user.getName()}" name="name">-->
-<!--        <br>-->
-<!--        LastName:-->
-<!--        <input type="text" th:value="${user.getLastName()}" name="lastName"><br>-->
-<!--        Email:-->
-<!--        <input type="text" th:value="${user.getEmail()}" name="email">-->
-<!--        <br>-->
-<!--        Password:-->
-<!--        <input type="text" th:value="${user.getPassword()}" name="password">-->
-<!--        <br>-->
-<!--        Mobile:-->
-<!--        <input type="text" th:value="${user.getPhoneNumber()}" name="phoneNumber">-->
-<!--        <br>-->
+            <form th:action="@{/updated/profile/{id}(id=${user.getId()})}" method="post" th:object="${user}">
+                <h1 class="text-center">Edit your profile</h1>
 
-<!--        <button name="button" >Update</button>-->
-
-<!--    </form>-->
-
-<!--    </div>-->
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 offset-md-3">
-
-                    <form  th:action="@{/updated/profile/{id}(id=${user.getId()})}" method="post" th:object="${user}">
-                        <h1 class="text-center">Edit your profile</h1>
-
-                        <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">
-                            <p class="text-center" th:text="${session.message.content}"></p>
-                            <th:block th:text="${#session.removeAttribute('message')}"></th:block>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">name
-                            </label>
-                            <input
-                                    name="name"
-                                    th:value="${user.name}"
-                                    th:classappend="${#fields.hasErrors('name')?'is-invalid':''}"
-                                    type="text"
-                                    class="form-control"
-                                    id="exampleInputEmail1" aria-describedby="emailHelp">
-
-                            <div th:each="e : ${#fields.errors('name')}"
-                                 th:text="${e}"
-                                 id="validationServer03Feedback"
-                                 class="invalid-feedback">
-                            </div>
-                            <!--    <p th:each="e : ${#fields.errors('name')}" th:text=${e}></p> -->
-
-                        </div>
-                        <!--          //////-->
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">lastname
-                            </label>
-                            <input
-                                    name="lastName"
-                                    th:value="${user.lastName}"
-                                    th:classappend="${#fields.hasErrors('lastName')?'is-invalid':''}"
-                                    type="text"
-                                    class="form-control"
-                                    id="exampleInputEmail" aria-describedby="emailHelp">
-
-                            <div th:each="e : ${#fields.errors('lastName')}"
-                                 th:text="${e}"
-                                 id="validationServer03Feedback1"
-                                 class="invalid-feedback">
-                            </div>
-                            <!--    <p th:each="e : ${#fields.errors('name')}" th:text=${e}></p> -->
-
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">email
-                            </label>
-                            <input
-                                    name="email"
-                                    th:value="${user.email}"
-                                    th:classappend="${#fields.hasErrors('email')?'is-invalid':''}"
-                                    type="email"
-                                    class="form-control"
-                                    id="exampleInputEmnail1" aria-describedby="emailHelp">
-                            <div th:each="e : ${#fields.errors('email')}"
-                                 th:text="${e}"
-                                 id="validationServer03Fneedback"
-                                 class="invalid-feedback">
-                            </div>
-                        </div>
-
-<!--                        <div class="mb-3">-->
-<!--                            <label for="exampleInputPassword1" class="form-label">Password</label>-->
-<!--                            <input-->
-<!--                                    name="password"-->
-<!--                                    type="password" class="form-control"-->
-<!--                                    id="exampleInputPassword1">-->
-<!--                        </div>-->
-
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Phone Number
-                            </label>
-                            <input
-                                    name="phoneNumber"
-                                    th:value="${user.phoneNumber}"
-                                    th:classappend="${#fields.hasErrors('phoneNumber')?'is-invalid':''}"
-                                    type="tel"
-                                    class="form-control"
-                                    id="exampleInputEmnail" aria-describedby="emailHelp">
-                            <div th:each="e : ${#fields.errors('phoneNumber')}"
-                                 th:text="${e}"
-                                 id="validationServer03Fneedback1"
-                                 class="invalid-feedback">
-                            </div>
-                        </div>
-
-                        <div class="mb-3 form-check">
-                            <input
-                                    type="checkbox"
-                                    class="form-check-input"
-                                    id="exampleCheck1">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">
+                    <p class="text-center" th:text="${session.message.content}"></p>
+                    <th:block th:text="${#session.removeAttribute('message')}"></th:block>
                 </div>
-            </div>
-        </div>
 
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">name
+                    </label>
+                    <input
+                            name="name"
+                            th:value="${user.name}"
+                            th:classappend="${#fields.hasErrors('name')?'is-invalid':''}"
+                            type="text"
+                            class="form-control"
+                            id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                    <div th:each="e : ${#fields.errors('name')}"
+                         th:text="${e}"
+                         id="validationServer03Feedback"
+                         class="invalid-feedback">
+                    </div>
+                    <!--    <p th:each="e : ${#fields.errors('name')}" th:text=${e}></p> -->
+
+                </div>
+                <!--          //////-->
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">lastname
+                    </label>
+                    <input
+                            name="lastName"
+                            th:value="${user.lastName}"
+                            th:classappend="${#fields.hasErrors('lastName')?'is-invalid':''}"
+                            type="text"
+                            class="form-control"
+                            id="exampleInputEmail" aria-describedby="emailHelp">
+
+                    <div th:each="e : ${#fields.errors('lastName')}"
+                         th:text="${e}"
+                         id="validationServer03Feedback1"
+                         class="invalid-feedback">
+                    </div>
+                    <!--    <p th:each="e : ${#fields.errors('name')}" th:text=${e}></p> -->
+
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">email
+                    </label>
+                    <input
+                            name="email"
+                            th:value="${user.email}"
+                            th:classappend="${#fields.hasErrors('email')?'is-invalid':''}"
+                            type="email"
+                            class="form-control"
+                            id="exampleInputEmnail1" aria-describedby="emailHelp">
+                    <div th:each="e : ${#fields.errors('email')}"
+                         th:text="${e}"
+                         id="validationServer03Fneedback"
+                         class="invalid-feedback">
+                    </div>
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Phone Number
+                    </label>
+                    <input
+                            name="phoneNumber"
+                            th:value="${user.phoneNumber}"
+                            th:classappend="${#fields.hasErrors('phoneNumber')?'is-invalid':''}"
+                            type="tel"
+                            class="form-control"
+                            id="exampleInputEmnail" aria-describedby="emailHelp">
+                    <div th:each="e : ${#fields.errors('phoneNumber')}"
+                         th:text="${e}"
+                         id="validationServer03Fneedback1"
+                         class="invalid-feedback">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
     </div>
+</div>
+
+</div>
 
 </div>
 </body>
