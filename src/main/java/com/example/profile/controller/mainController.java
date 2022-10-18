@@ -3,6 +3,7 @@ package com.example.profile.controller;
 import com.example.profile.entities.User;
 import com.example.profile.helper.Message;
 import com.example.profile.repository.UserRepository;
+import com.example.profile.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 public class mainController {
+    
 
     @Autowired
-    UserRepository userRepository;
+   UserService userService;
 
     @GetMapping("/")
     public String user(Model model) {
@@ -35,11 +36,11 @@ public class mainController {
     @PostMapping("/register")
     public String register(@Valid @ModelAttribute("user") User user, BindingResult result, Model model, HttpSession session) {
         try {
-            if (userRepository.existsByName(user.getName())) {
+            if (userService.nameMatched(user.getName())) {
                 model.addAttribute("user", user);
                 throw new Exception(" Name-already-exits");
             }
-            if (userRepository.existsByEmail(user.getEmail())) {
+            if (userService.emailMatched(user.getEmail())) {
                 model.addAttribute("user", user);
                 throw new Exception(" Email-already-exits");
             }
@@ -47,7 +48,7 @@ public class mainController {
                 model.addAttribute("user", user);
                 return "user";
             }
-            userRepository.save(user);
+            userService.saveUser(user);
             model.addAttribute("user", new User());
             session.setAttribute("message", new Message("successfull", "alert-success"));
             return "user";
@@ -66,8 +67,8 @@ public class mainController {
     public String login(HttpServletRequest request, Model model) {
         String email = request.getParameter("email").trim();
         String password = request.getParameter("password").trim();
-        if (userRepository.existsByEmail(email) && userRepository.existsByPassword(password)) {
-            User user = userRepository.findByEmail(email);
+        if (userService.emailMatched(email) && userService.passwordMatch(password)) {
+            User user = userService.getUserByEmail(email);
             model.addAttribute("user", user);
         } else {
             return "login";
@@ -76,7 +77,7 @@ public class mainController {
     }
     @GetMapping("/editprofile/{id}")
     public String editProfile(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", userRepository.findById(id).get());
+        model.addAttribute("user", userService.getUserById(id));
         return "editprofile";
     }
 
@@ -88,12 +89,12 @@ public class mainController {
                 model.addAttribute("user", user);
                 return "editprofile";
             }
-            userRepository.save(user);
+            userService.saveUser(user);
         } catch (Exception e) {
             model.addAttribute("user", user);
             session.setAttribute("message", new Message(" Server error !! " + e.getMessage(), "alter-danger"));
         }
-          User user1=   userRepository.findById(id).get();
+          User user1=   userService.getUserById(id);
         model.addAttribute("user", user1);
         return "profile";
     }
