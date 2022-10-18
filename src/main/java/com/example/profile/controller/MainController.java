@@ -37,6 +37,7 @@ public class MainController {
             User user = userService.getUserByEmail(email);
             model.addAttribute("user", user);
         } else {
+            model.addAttribute("message", "invalid credential");
             return "login";
         }
         return "profile";

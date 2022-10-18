@@ -5,28 +5,27 @@
     <title>Profile</title>
 </head>
 <body>
-<h1><p th:text="'Welcome :'+${user.getName()}" /> </h1>
+<h1><p th:text="'Welcome :'+${user.getName()}"/></h1>
 <table class="table table-bordered">
     <thead></thead>
     <tbody>
-    <tr >
+    <tr>
         <td>
-            <p th:text="'name:'+${user.getName()}" />
+            <p th:text="'name:'+${user.getName()}"/>
 
-            <p th:text="'lastName: '+${user.getLastName()}" />
+            <p th:text="'lastName: '+${user.getLastName()}"/>
 
-            <p th:text=" 'Email: '+ ${user.getEmail}" />
-            <p th:text=" 'Phone: '+ ${user.getPhoneNumber()}" />
+            <p th:text=" 'Email: '+ ${user.getEmail}"/>
+            <p th:text=" 'Phone: '+ ${user.getPhoneNumber()}"/>
             <form th:action="@{/editprofile/{id}(id=${user.getId()})}"
                   method="get">
                 <button>Edit it</button>
             </form>
 
             <form th:action="@{/}"
-                               method="get">
-            <button>logout</button>
-        </form>
-
+                  method="get">
+                <button>logout</button>
+            </form>
 
 
         </td>
