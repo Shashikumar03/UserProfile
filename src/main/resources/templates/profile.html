@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+<h1><p th:text="'WelCome:'+${user.getName()}" /> </h1>
+<table class="table table-bordered">
+    <thead></thead>
+    <tbody>
+    <tr >
+        <td>
+            <p th:text="'name:'+${user.getName()}" />
+
+            <p th:text="'lastName: '+${user.getLastName()}" />
+
+            <p th:text=" 'Email: '+ ${user.getEmail}" />
+            <p th:text=" 'Phone: '+ ${user.getPhoneNumber()}" />
+            <form th:action="@{/editprofile/{id}(id=${user.getId()})}"
+                  method="get">
+                <button>Edit it</button>
+            </form>
+<br>
+            <form th:action="@{/}"
+                               method="get">
+            <button>logout</button>
+        </form>
+
+
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
