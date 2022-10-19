@@ -21,7 +21,7 @@ public class MainController {
 
 
     @Autowired
-    UserService userService;
+  private  UserService userService;
 
     @GetMapping("/")
     public String user(Model model) {

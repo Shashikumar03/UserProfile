@@ -18,7 +18,7 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
     @Autowired
-    UserService userService;
+   private UserService userService;
 
     @GetMapping("/user")
     public String newUser(Model model) {
