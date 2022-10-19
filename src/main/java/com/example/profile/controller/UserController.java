@@ -18,7 +18,7 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
     @Autowired
-   private UserService userService;
+    private UserService userService;
 
     @GetMapping("/user")
     public String newUser(Model model) {
@@ -27,7 +27,8 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid @ModelAttribute("user") User user, BindingResult result, Model model, HttpSession session) {
+    public String register(@Valid @ModelAttribute("user") User user, BindingResult result,
+                           Model model, HttpSession session) {
         try {
             if (userService.nameMatched(user.getName())) {
                 model.addAttribute("user", user);
@@ -47,15 +48,12 @@ public class UserController {
             return "user";
         } catch (Exception e) {
             model.addAttribute("user", user);
-            session.setAttribute("message", new Message(" Server error !! " + e.getMessage(), "alter-danger"));
+            session.setAttribute("message", new Message(" Server error !! "
+                    + e.getMessage(), "alter-danger"));
             return "user";
         }
     }
 
-    @GetMapping("/loginpage")
-    public String loginPage() {
-        return "login";
-    }
 
     @GetMapping("/editprofile/{id}")
     public String editProfile(@PathVariable("id") int id, Model model) {

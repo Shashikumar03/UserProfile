@@ -28,6 +28,10 @@ public class MainController {
         return "index";
     }
 
+    @GetMapping("/loginpage")
+    public String loginPage() {
+        return "login";
+    }
 
     @PostMapping("/logedIn")
     public String login(HttpServletRequest request, Model model) {

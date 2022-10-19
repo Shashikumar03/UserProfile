@@ -37,7 +37,6 @@ public class userServiceImplementation implements UserService {
         }
         return false;
     }
-
     @Override
     public boolean passwordMatch(String password) {
         if (userRepository.existsByPassword(password)) {
@@ -49,6 +48,5 @@ public class userServiceImplementation implements UserService {
     @Override
     public void saveUser(User user) {
         userRepository.save(user);
-
     }
 }
