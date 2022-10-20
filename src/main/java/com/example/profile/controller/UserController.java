@@ -29,29 +29,7 @@ public class UserController {
     @PostMapping("/register")
     public String register(@Valid @ModelAttribute("user") User user, BindingResult result,
                            Model model, HttpSession session) {
-        try {
-            if (userService.nameMatched(user.getName())) {
-                model.addAttribute("user", user);
-                throw new Exception(" Name-already-exits");
-            }
-            if (userService.emailMatched(user.getEmail())) {
-                model.addAttribute("user", user);
-                throw new Exception(" Email-already-exits");
-            }
-            if (result.hasErrors()) {
-                model.addAttribute("user", user);
-                return "user";
-            }
-            userService.saveUser(user);
-            model.addAttribute("user", new User());
-            session.setAttribute("message", new Message("successfull", "alert-success"));
-            return "user";
-        } catch (Exception e) {
-            model.addAttribute("user", user);
-            session.setAttribute("message", new Message(" Server error !! "
-                    + e.getMessage(), "alter-danger"));
-            return "user";
-        }
+          return userService.register(user, result, model, session);
     }
 
 
@@ -64,18 +42,6 @@ public class UserController {
     @PostMapping("/updated/profile/{id}")
     public String updatedProfile(@Valid @ModelAttribute("user") User user, BindingResult result, @PathVariable("id")
     int id, Model model, HttpSession session) {
-        try {
-            if (result.hasErrors()) {
-                model.addAttribute("user", user);
-                return "editprofile";
-            }
-            userService.saveUser(user);
-        } catch (Exception e) {
-            model.addAttribute("user", user);
-            session.setAttribute("message", new Message(" Server error !! " + e.getMessage(), "alter-danger"));
-        }
-        User user1 = userService.getUserById(id);
-        model.addAttribute("user", user1);
-        return "profile";
+     return  userService.updatedProfile(user,result,id,model, session);
     }
 }
